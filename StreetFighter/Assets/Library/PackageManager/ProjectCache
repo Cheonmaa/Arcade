@@ -1,6 +1,6 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: E:/Unity Project/StreetFighters/StreetFighter/Assets/Packages/manifest.json
+    m_FilePath: E:/GitHub/Unity/Arcade/StreetFighter/Assets/Packages/manifest.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
@@ -8,7 +8,7 @@ m_ProjectFiles:
       ticks: 638835418680000000
     m_Hash: 205969706
   m_LockFileStatus:
-    m_FilePath: E:/Unity Project/StreetFighters/StreetFighter/Assets/Packages/packages-lock.json
+    m_FilePath: E:/GitHub/Unity/Arcade/StreetFighter/Assets/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
@@ -19,7 +19,7 @@ m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: E:/Unity Project/StreetFighters/StreetFighter/Assets/Packages
+m_ProjectPath: E:/GitHub/Unity/Arcade/StreetFighter/Assets/Packages
 m_EditorVersion: 6000.1.3f1 (f34db9734971)
 m_ResolvedPackages:
 - packageId: com.unity.multiplayer.center@1.0.0
@@ -27,7 +27,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: E:\Unity Project\StreetFighters\StreetFighter\Assets\Library\PackageCache\com.unity.multiplayer.center@f3fb577b3546
+  resolvedPath: E:\GitHub\Unity\Arcade\StreetFighter\Assets\Library\PackageCache\com.unity.multiplayer.center@f3fb577b3546
   assetPath: Packages/com.unity.multiplayer.center
   name: com.unity.multiplayer.center
   displayName: Multiplayer Center

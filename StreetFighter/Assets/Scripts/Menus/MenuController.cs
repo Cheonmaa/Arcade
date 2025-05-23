@@ -25,18 +25,18 @@ public class MenuController : MonoBehaviour
         {
             if (_panel) panelsDict.Add(_panel.GetPanelType(), _panel);
         }
-        OpenOnePanel(PanelType.Main);
+        OpenOnePanel(PanelType.Main, false);
     }
 
-    private void OpenOnePanel(PanelType _type)
+    private void OpenOnePanel(PanelType _type, bool _animate)
     {
-        foreach (var _panel in panelsList) _panel.ChangeState(false);
+        foreach (var _panel in panelsList) _panel.ChangeState(false, _animate);
 
-        if (_type != PanelType.None) panelsDict[_type].ChangeState(true);
+        if (_type != PanelType.None) panelsDict[_type].ChangeState(true, _animate);
     }
     public void OpenPanel(PanelType _type)
     {
-        OpenOnePanel(_type);
+        OpenOnePanel(_type, true);
     }
 
     public void ChangeScene(string _sceneName)
