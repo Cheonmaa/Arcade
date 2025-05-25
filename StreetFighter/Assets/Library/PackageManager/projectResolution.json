@@ -1,18 +1,18 @@
 {
   "context": {
-    "projectPath": "E:/Unity Project/StreetFighters/StreetFighter/Assets/Packages",
+    "projectPath": "E:/GitHub/Unity/Arcade/StreetFighter/Assets/Packages",
     "unityVersion": "6000.1.3f1"
   },
   "inputs": [
-    "E:\\Unity Project\\StreetFighters\\StreetFighter\\Assets\\Packages\\manifest.json",
-    "E:\\Unity Project\\StreetFighters\\StreetFighter\\Assets\\Packages\\packages-lock.json",
+    "E:\\GitHub\\Unity\\Arcade\\StreetFighter\\Assets\\Packages\\manifest.json",
+    "E:\\GitHub\\Unity\\Arcade\\StreetFighter\\Assets\\Packages\\packages-lock.json",
     "E:\\Unity\\Hub\\Editor\\6000.1.3f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
     "com.unity.multiplayer.center@1.0.0": {
       "name": "com.unity.multiplayer.center",
       "displayName": "Multiplayer Center",
-      "resolvedPath": "E:\\Unity Project\\StreetFighters\\StreetFighter\\Assets\\Library\\PackageCache\\com.unity.multiplayer.center@f3fb577b3546",
+      "resolvedPath": "E:\\GitHub\\Unity\\Arcade\\StreetFighter\\Assets\\Library\\PackageCache\\com.unity.multiplayer.center@f3fb577b3546",
       "fingerprint": "f3fb577b3546594b97b8cc34307cd621f60f1c73",
       "editorCompatibility": "6000.0.0a1",
       "version": "1.0.0",
