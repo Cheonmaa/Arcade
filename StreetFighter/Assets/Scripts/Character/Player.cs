@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("ESP32 Input Reader")]
+    public SerialReader esp32InputReader;
+
     [Header("Player Settings")]
     [Tooltip("Maximum health of the player")]
     public int maxHealth = 100;
@@ -22,16 +25,19 @@ public class Player : MonoBehaviour
     public LayerMask enemies;
     public GameObject attackHitbox;
 
+    public bool debug;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        debug = false;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update() // PC version
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -46,6 +52,34 @@ public class Player : MonoBehaviour
             else
             {
                 anim.SetBool("IsPunching", true);
+            }
+        }
+    }*/
+
+    void Update() //esp32 version
+    {
+        
+        if (esp32InputReader.buttonState1P1)
+        {
+            if (debug)
+                Debug.Log("x: " + esp32InputReader.x1 + "  y:" + esp32InputReader.y1);
+            if (esp32InputReader.y1 >= 4000)
+            {
+                anim.SetBool("IsKicking", true);
+                if (debug)
+                    Debug.Log("Kick");
+            }
+            else if (esp32InputReader.x1 >= 4000)
+            {
+                anim.SetBool("IsJabing", true);
+                if (debug)
+                    Debug.Log("Jab");
+            }
+            else
+            {
+                anim.SetBool("IsPunching", true);
+                if (debug)
+                    Debug.Log("Punch");
             }
         }
     }

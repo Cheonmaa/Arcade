@@ -10,18 +10,20 @@ public class SerialReader : MonoBehaviour
     volatile bool keepReading = true;
     string latestData = "";
 
-    public int buttonState1P1;
-    public int buttonState2P1;
-    public int buttonState1P2;
-    public int buttonState2P2;
+    public bool buttonState1P1;
+    public bool buttonState2P1;
+    public bool buttonState1P2;
+    public bool buttonState2P2;
 
     public int x1;
     public int y1;
     public int x2;
     public int y2;
 
+    public bool debug;
     void Start()
     {
+        debug = false;
         serialPort.Open();
         serialThread = new Thread(ReadSerial);
         serialThread.Start();
@@ -44,28 +46,35 @@ public class SerialReader : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(latestData))
         {
-            Debug.Log("Received: " + latestData);
             ParseInput(latestData);
             latestData = ""; // clear after processing
         }
     }
 
     void ParseInput(string data)
-{
-    // Example input:
-    // BTN1P1:1 BTN2P1:1 XP1:1839 YP1:1782 BTN1P2:1 BTN2P2:1 XP2:1764 YP2:1806
+    {
+        // Example input:
+        // BTN1P1:1 BTN2P1:1 XP1:1839 YP1:1782 BTN1P2:1 BTN2P2:1 XP2:1764 YP2:1806
 
-    string[] parts = data.Split(' ');
+        string[] parts = data.Split(' ');
 
         foreach (string part in parts)
         {
             if (part.StartsWith("BTN1P1:"))
             {
-                buttonState1P1 = int.Parse(part.Substring(7));
+                int temp = int.Parse(part.Substring(7));
+                if (temp == 1)
+                    buttonState1P1 = true;
+                else
+                    buttonState1P1 = false;
             }
             else if (part.StartsWith("BTN2P1:"))
             {
-                buttonState2P1 = int.Parse(part.Substring(7));
+                int temp = int.Parse(part.Substring(7));
+                if (temp == 1)
+                    buttonState2P1 = true;
+                else
+                    buttonState2P1 = false;
             }
             else if (part.StartsWith("XP1:"))
             {
@@ -77,11 +86,19 @@ public class SerialReader : MonoBehaviour
             }
             else if (part.StartsWith("BTN1P2:"))
             {
-                buttonState1P2 = int.Parse(part.Substring(7));
+                int temp = int.Parse(part.Substring(7));
+                if (temp == 1)
+                    buttonState1P2 = true;
+                else
+                    buttonState1P2 = false;
             }
             else if (part.StartsWith("BTN2P2:"))
             {
-                buttonState2P2 = int.Parse(part.Substring(7));
+                int temp = int.Parse(part.Substring(7));
+                if (temp == 1)
+                    buttonState2P2 = true;
+                else
+                    buttonState2P2 = false;
             }
             else if (part.StartsWith("XP2:"))
             {
@@ -91,6 +108,10 @@ public class SerialReader : MonoBehaviour
             {
                 y2 = int.Parse(part.Substring(4));
             }
+        }
+                        
+        if (debug)
+        {
             Debug.Log("buttonState1P1:" + buttonState1P1.ToString()+" buttonState2P1:" +buttonState2P1.ToString() +" xP1:" + x1.ToString() + " yP1:" + y1.ToString() + "\nbuttonState1P2:" + buttonState1P2 + " buttonState2P2:" + buttonState2P2 + " xP2:" + x2.ToString() + " yP2:" + y2);
         }
     }
