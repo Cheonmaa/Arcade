@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -58,7 +59,6 @@ public class Player : MonoBehaviour
 
     void Update() //esp32 version
     {
-        
         if (esp32InputReader.buttonState1P1)
         {
             if (debug)
@@ -81,6 +81,11 @@ public class Player : MonoBehaviour
                 if (debug)
                     Debug.Log("Punch");
             }
+        }
+        if (Input.GetKey(KeyCode.L)) // end round
+        {
+            GameManager.RoundNumber++;
+            SceneManager.LoadScene("SELECTCHAR");
         }
     }
 
