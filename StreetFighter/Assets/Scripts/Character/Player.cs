@@ -15,7 +15,9 @@ public class Player : MonoBehaviour
     [Tooltip("Attack power of the player")]
     public int damage = 10;
     public float attackRadius = 0.5f;
-    
+    [Tooltip("Flag to indicate if the hitbox has been touched")]
+    public bool hitboxTouched = false;
+
 
     [Header("Components")]
     [Tooltip("Health bar component to display player's health")]
@@ -112,8 +114,10 @@ public class Player : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
+                hitboxTouched = true;
             }
         }
+        hitboxTouched = false;
     }
 
     private void OnDrawGizmosSelected()

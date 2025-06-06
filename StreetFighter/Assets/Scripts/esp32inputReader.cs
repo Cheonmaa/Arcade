@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SerialReader : MonoBehaviour
 {
-    SerialPort serialPort = new SerialPort("COM4", 9600);
+    SerialPort serialPort = new SerialPort("COM3", 9600);
     Thread serialThread;
     volatile bool keepReading = true;
     string latestData = "";
@@ -23,7 +23,7 @@ public class SerialReader : MonoBehaviour
     public bool debug;
     void Start()
     {
-        debug = false;
+        debug = true;
         serialPort.Open();
         serialThread = new Thread(ReadSerial);
         serialThread.Start();
