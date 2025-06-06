@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -61,33 +62,70 @@ public class Player : MonoBehaviour
 
     void Update() //esp32 version
     {
-        if (esp32InputReader.buttonState1P1)
+        if (debug)
         {
-            if (debug)
-                Debug.Log("x: " + esp32InputReader.x1 + "  y:" + esp32InputReader.y1);
-            if (esp32InputReader.y1 >= 4000)
-            {
-                anim.SetBool("IsKicking", true);
-                if (debug)
-                    Debug.Log("Kick");
-            }
-            else if (esp32InputReader.x1 >= 4000)
-            {
-                anim.SetBool("IsJabing", true);
-                if (debug)
-                    Debug.Log("Jab");
-            }
-            else
-            {
-                anim.SetBool("IsPunching", true);
-                if (debug)
-                    Debug.Log("Punch");
-            }
+            Debug.Log("x1: " + esp32InputReader.x1 + "  y1:" + esp32InputReader.y1);
+            Debug.Log("x2: " + esp32InputReader.x2 + "  y2:" + esp32InputReader.y2);
         }
+
         if (Input.GetKey(KeyCode.L)) // end round
         {
             GameManager.RoundNumber++;
             SceneManager.LoadScene("SELECTCHAR");
+        }
+        
+        if (CompareTag("Player1"))
+        {
+            if (esp32InputReader.buttonState1P1)
+            {
+
+                if (esp32InputReader.y1 == 1)
+                {
+                    anim.SetBool("IsKicking", true);
+                    if (debug)
+                        Debug.Log("Kick");
+                }
+                else if (esp32InputReader.x1 == 1)
+                {
+                    anim.SetBool("IsJabing", true);
+                    if (debug)
+                        Debug.Log("Jab");
+                }
+                else
+                {
+                    anim.SetBool("IsPunching", true);
+                    if (debug)
+                        Debug.Log("Punch");
+                }
+            }
+        }
+        else if (CompareTag("Player2"))
+        {
+            if (esp32InputReader.buttonState1P2)
+            {
+                if (esp32InputReader.y2 == 1)
+                {
+                    anim.SetBool("IsKicking", true);
+                    if (debug)
+                        Debug.Log("Kick");
+                }
+                else if (esp32InputReader.x2 == -1)
+                {
+                    anim.SetBool("IsJabing", true);
+                    if (debug)
+                        Debug.Log("Jab");
+                }
+                else
+                {
+                    anim.SetBool("IsPunching", true);
+                    if (debug)
+                        Debug.Log("Punch");
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Player has no tag or tag not detected");
         }
     }
 
