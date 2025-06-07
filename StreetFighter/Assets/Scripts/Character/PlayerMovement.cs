@@ -4,6 +4,8 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("ESP32 Input Reader")]
+    public SerialReader esp32InputReader;
 
     [Header("Character Controller")]
     public CharacterController2D controller;
@@ -16,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     bool crouch = false;
 
     // Update is called once per frame
-    void Update()
+    /*void Update()   //PC version
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -42,6 +44,70 @@ public class PlayerMovement : MonoBehaviour
         {
             crouch = false;
         }
+    }*/
+
+
+void Update()   //esp32 version
+    {
+        if (CompareTag("Player1"))
+        {
+            horizontalMove = esp32InputReader.x1 * runSpeed;
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+            if (esp32InputReader.x1 != 0)
+            {
+                animator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalking", false);
+            }
+            if (esp32InputReader.y1 == -1)
+            {
+                jump = true;
+                animator.SetBool("IsJumping", true);
+            }
+
+            if (esp32InputReader.y1 == 1)
+            {
+                crouch = true;
+            }
+            else
+            {
+                crouch = false;
+            }
+        }
+        else if (CompareTag("Player2"))
+        {
+            horizontalMove = esp32InputReader.x2 * runSpeed;
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+            if (esp32InputReader.x2 != 0)
+            {
+                animator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalking", false);
+            }
+            if (esp32InputReader.y2 == -1)
+            {
+                jump = true;
+                animator.SetBool("IsJumping", true);
+            }
+
+            if (esp32InputReader.y2 == 1)
+            {
+                crouch = true;
+            }
+            else
+            {
+                crouch = false;
+            }
+        }
+        else
+        {
+            Debug.Log("Player has no tag or tag not detected");
+        }
+        
     }
 
     public void OnLanding()

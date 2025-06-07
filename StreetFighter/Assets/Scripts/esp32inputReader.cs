@@ -3,9 +3,15 @@ using System.IO.Ports;
 using System.Threading;
 using UnityEngine;
 
+/// <summary>
+/// This read SerialInput (which is made by the c++ code) and 
+///- turns button into boolean with true if pressed
+///- turns joystick values into -1,0,1 depending of its orientation.
+/// </summary>
+
 public class SerialReader : MonoBehaviour
 {
-    SerialPort serialPort = new SerialPort("COM3", 9600);
+    SerialPort serialPort = new SerialPort("COM4", 9600);
     Thread serialThread;
     volatile bool keepReading = true;
     string latestData = "";
@@ -23,7 +29,7 @@ public class SerialReader : MonoBehaviour
     public bool debug;
     void Start()
     {
-        debug = true;
+        debug = false;
         serialPort.Open();
         serialThread = new Thread(ReadSerial);
         serialThread.Start();
@@ -79,10 +85,34 @@ public class SerialReader : MonoBehaviour
             else if (part.StartsWith("XP1:"))
             {
                 x1 = int.Parse(part.Substring(4));
+                if (x1 <= 100)
+                {
+                    x1 = -1;
+                }
+                else if (x1 >= 4000)
+                {
+                    x1 = 1;
+                }
+                else
+                {
+                    x1 = 0;
+                }
             }
             else if (part.StartsWith("YP1:"))
             {
                 y1 = int.Parse(part.Substring(4));
+                if (y1 <= 100)
+                {
+                    y1 = -1;
+                }
+                else if (y1 >= 4000)
+                {
+                    y1 = 1;
+                }
+                else
+                {
+                    y1 = 0;
+                }
             }
             else if (part.StartsWith("BTN1P2:"))
             {
@@ -103,16 +133,40 @@ public class SerialReader : MonoBehaviour
             else if (part.StartsWith("XP2:"))
             {
                 x2 = int.Parse(part.Substring(4));
+                if (x2 <= 100)
+                {
+                    x2 = -1;
+                }
+                else if (x2 >= 4000)
+                {
+                    x2 = 1;
+                }
+                else
+                {
+                    x2 = 0;
+                }
             }
             else if (part.StartsWith("YP2:"))
             {
                 y2 = int.Parse(part.Substring(4));
+                if (y2 <= 100)
+                {
+                    y2 = -1;
+                }
+                else if (y2 >= 4000)
+                {
+                    y2 = 1;
+                }
+                else
+                {
+                    y2 = 0;
+                }
             }
         }
-                        
+
         if (debug)
         {
-            Debug.Log("buttonState1P1:" + buttonState1P1.ToString()+" buttonState2P1:" +buttonState2P1.ToString() +" xP1:" + x1.ToString() + " yP1:" + y1.ToString() + "\nbuttonState1P2:" + buttonState1P2 + " buttonState2P2:" + buttonState2P2 + " xP2:" + x2.ToString() + " yP2:" + y2);
+            Debug.Log("buttonState1P1:" + buttonState1P1.ToString() + " buttonState2P1:" + buttonState2P1.ToString() + " xP1:" + x1.ToString() + " yP1:" + y1.ToString() + "\nbuttonState1P2:" + buttonState1P2 + " buttonState2P2:" + buttonState2P2 + " xP2:" + x2.ToString() + " yP2:" + y2);
         }
     }
 

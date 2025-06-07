@@ -1016,7 +1016,7 @@ GameObject:
   - component: {fileID: 562258992}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1255,6 +1255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3fcac8096cae24ba79513ef3faf2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  esp32InputReader: {fileID: 798340611}
   controller: {fileID: 562258987}
   animator: {fileID: 562258991}
   runSpeed: 40
@@ -4516,7 +4517,7 @@ GameObject:
   - component: {fileID: 2132018703}
   m_Layer: 7
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4580,9 +4581,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3fcac8096cae24ba79513ef3faf2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  esp32InputReader: {fileID: 798340611}
   controller: {fileID: 2132018708}
   animator: {fileID: 2132018704}
-  runSpeed: 0
+  runSpeed: 40
 --- !u!58 &2132018706
 CircleCollider2D:
   m_ObjectHideFlags: 0
