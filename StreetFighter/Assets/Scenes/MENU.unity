@@ -2010,7 +2010,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.087357, y: -205}
+  m_AnchoredPosition: {x: -581, y: 164}
   m_SizeDelta: {x: 216.688, y: 60.9435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &489850339
@@ -3015,7 +3015,6 @@ GameObject:
   - component: {fileID: 879148124}
   - component: {fileID: 879148123}
   - component: {fileID: 879148122}
-  - component: {fileID: 879148121}
   m_Layer: 5
   m_Name: ScoreBoard
   m_TagString: Untagged
@@ -3047,22 +3046,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 700, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &879148121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879148119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6fac351ae168345b8bc650336a8074, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterVol: {fileID: 0}
-  musicVol: {fileID: 0}
-  sfxVol: {fileID: 0}
-  mainAudioMixer: {fileID: 24100000, guid: 1c4bb3182026e8c429744569e591adf9, type: 2}
 --- !u!225 &879148122
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4941,8 +4924,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5732,6 +5715,7 @@ MonoBehaviour:
   panelsList:
   - {fileID: 2122131204}
   - {fileID: 48686918}
+  - {fileID: 879148123}
 --- !u!1 &2074385684
 GameObject:
   m_ObjectHideFlags: 0
