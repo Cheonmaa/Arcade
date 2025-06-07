@@ -31,6 +31,8 @@ public class SerialReader : MonoBehaviour
     void Start()
     {
         debug = false;
+
+        // Searches for esp32 port
         string[] ports = SerialPort.GetPortNames();
         foreach (string portName in ports)
         {
@@ -40,14 +42,13 @@ public class SerialReader : MonoBehaviour
                 testPort.ReadTimeout = 1000;
                 testPort.Open();
 
-                // Flush the first (possibly partial) line
+                // Flushes the first (possibly partial) line
                 if (testPort.BytesToRead > 0)
                     testPort.ReadLine(); // Discard garbage
 
-                // Read the next full line
                 string testLine = testPort.ReadLine();
 
-                if (testLine.StartsWith("BTN")) // Our expected format
+                if (testLine.StartsWith("BTN"))
                 {
                     Debug.Log("ESP32 Found on " + portName + ": " + testLine);
                     serialPort = testPort;
@@ -57,7 +58,7 @@ public class SerialReader : MonoBehaviour
                     return;
                 }
 
-                testPort.Close(); // Not our ESP32
+                testPort.Close();
             }
             catch (Exception e)
             {
