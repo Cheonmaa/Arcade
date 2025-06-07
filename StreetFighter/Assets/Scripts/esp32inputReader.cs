@@ -27,12 +27,45 @@ public class SerialReader : MonoBehaviour
     public int y2;
 
     public bool debug;
+
     void Start()
     {
         debug = false;
-        serialPort.Open();
-        serialThread = new Thread(ReadSerial);
-        serialThread.Start();
+        string[] ports = SerialPort.GetPortNames();
+        foreach (string portName in ports)
+        {
+            try
+            {
+                SerialPort testPort = new SerialPort(portName, 9600);
+                testPort.ReadTimeout = 1000;
+                testPort.Open();
+
+                // Flush the first (possibly partial) line
+                if (testPort.BytesToRead > 0)
+                    testPort.ReadLine(); // Discard garbage
+
+                // Read the next full line
+                string testLine = testPort.ReadLine();
+
+                if (testLine.StartsWith("BTN")) // Our expected format
+                {
+                    Debug.Log("ESP32 Found on " + portName + ": " + testLine);
+                    serialPort = testPort;
+
+                    serialThread = new Thread(ReadSerial);
+                    serialThread.Start();
+                    return;
+                }
+
+                testPort.Close(); // Not our ESP32
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("Could not use " + portName + ": " + e.Message);
+            }
+        }
+
+        Debug.LogError("ESP32 not found on any COM port.");
     }
 
     void ReadSerial()
