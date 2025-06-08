@@ -692,7 +692,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a357aeb6c6b5cd49ac51b8766757c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 473312472}
+  roundList:
+  - roundId: 0
+    texts: []
+  - roundId: 0
+    texts: []
+  - roundId: 0
+    texts: []
 --- !u!1 &567013643
 GameObject:
   m_ObjectHideFlags: 0

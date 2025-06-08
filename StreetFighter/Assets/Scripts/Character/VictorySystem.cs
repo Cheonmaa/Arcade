@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
-public class CombatSystem : MonoBehaviour
+public class VictorySystem : MonoBehaviour
 {
     [Header("Components")]
     public Player player1;

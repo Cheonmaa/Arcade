@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,27 +11,27 @@ public class Player : MonoBehaviour
     public SerialReader esp32InputReader;
 
     [Header("Player Settings")]
-    [Tooltip("Maximum health of the player")]
     public int maxHealth = 100;
-    [Tooltip("Current health of the player")]
     public int currentHealth;
-    [Tooltip("Attack power of the player")]
     public int damage = 10;
     public float attackRadius = 0.5f;
-    [Tooltip("Flag to indicate if the hitbox has been touched")]
     public bool hitboxTouched = false;
+
+    [Header("Combat System")]
+    public Player opponentCombat;
+    private PlayerMovement playerMovement;
+    public string opponentTag = "Player2";
+    public bool canAttack = true;
+    public bool isBlocking = false;
 
 
     [Header("Components")]
-    [Tooltip("Health bar component to display player's health")]
     public HealthBar healthBar;
-    [Tooltip("Animator component for player animations")]
     public Animator anim;
-    [Tooltip("Layer mask for enemies that can be attacked")]
+    private SpriteRenderer spriteRenderer;
+    public bool debug;
     public LayerMask enemies;
     public GameObject attackHitbox;
-
-    public bool debug;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,12 +40,24 @@ public class Player : MonoBehaviour
         debug = false;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerMovement = GetComponent<PlayerMovement>();
+        if (this.tag == "Player2")
+            opponentTag = "Player1";
+        else
+            opponentTag = "Player2";
+
+        GameObject opponent = GameObject.FindGameObjectWithTag(opponentTag);
+        if (opponent != null)
+        {
+            opponentCombat = opponent.GetComponent<Player>();
+        }
     }
 
     // Update is called once per frame
-    /*void Update() // PC version
+    void Update() // PC version
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canAttack && !isBlocking)
         {
             if (Input.GetKey(KeyCode.S))
             {
@@ -58,10 +72,10 @@ public class Player : MonoBehaviour
                 anim.SetBool("IsPunching", true);
             }
         }
-    }*/
-
-    void Update() //esp32 version
-    {
+        //}
+        /*
+        void Update() //esp32 version
+        {*/
         if (debug)
         {
             Debug.Log("x1: " + esp32InputReader.x1 + "  y1:" + esp32InputReader.y1);
@@ -73,10 +87,10 @@ public class Player : MonoBehaviour
             GameManager.RoundNumber++;
             SceneManager.LoadScene("SELECTCHAR");
         }
-        
+
         if (CompareTag("Player1"))
         {
-            if (esp32InputReader.buttonState1P1)
+            if (esp32InputReader.buttonState1P1 && canAttack)
             {
 
                 if (esp32InputReader.y1 == 1)
@@ -101,7 +115,7 @@ public class Player : MonoBehaviour
         }
         else if (CompareTag("Player2"))
         {
-            if (esp32InputReader.buttonState1P2)
+            if (esp32InputReader.buttonState1P2 && canAttack)
             {
                 if (esp32InputReader.y2 == 1)
                 {
@@ -122,6 +136,15 @@ public class Player : MonoBehaviour
                         Debug.Log("Punch");
                 }
             }
+        }
+
+        if (CompareTag("Player1") && Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(Block());
+        }
+        else if (CompareTag("Player2") && Input.GetKeyDown(KeyCode.Return))
+        {
+            StartCoroutine(Block());
         }
         else
         {
@@ -151,6 +174,11 @@ public class Player : MonoBehaviour
             Player enemy = enemies.GetComponent<Player>();
             if (enemy != null)
             {
+                if (enemy.isBlocking)
+                {
+                    StartCoroutine(enemy.HasBeenBlocked());
+                    continue;
+                }
                 enemy.TakeDamage(damage);
                 hitboxTouched = true;
             }
@@ -162,5 +190,31 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackHitbox.transform.position, attackRadius);
+    }
+
+    IEnumerator Block()
+    {
+        if (anim.GetBool("IsPunching") || anim.GetBool("IsKicking") || anim.GetBool("IsJabing"))
+            yield break;
+        isBlocking = true;
+        canAttack = false;
+        playerMovement.runSpeed = 0f;
+        spriteRenderer.color = new Color(0.5f, 0.5f, 1f, 1f);
+        yield return new WaitForSeconds(0.8f);
+        isBlocking = false;
+        canAttack = true;
+        playerMovement.runSpeed = 40f;
+        spriteRenderer.color = Color.white;
+    }
+
+    IEnumerator HasBeenBlocked()
+    {
+        canAttack = false;
+        playerMovement.runSpeed = 0f;
+        spriteRenderer.color = new Color(1f, 0.5f, 0.5f, 1f);
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
+        playerMovement.runSpeed = 40f;
+        spriteRenderer.color = Color.white;
     }
 }
