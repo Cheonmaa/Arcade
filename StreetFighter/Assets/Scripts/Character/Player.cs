@@ -16,12 +16,15 @@ public class Player : MonoBehaviour
     public int damage = 10;
     public float attackRadius = 0.5f;
     public bool hitboxTouched = false;
+    public int totalDamageDealt = 0;
 
     [Header("Combat System")]
     public Player opponentCombat;
     private PlayerMovement playerMovement;
     public string opponentTag = "Player2";
-    public bool canAttack = true;
+    private bool canAttack = true;
+    private bool canBlock = true;
+    private float blockCooldown = 5f;
     public bool isBlocking = false;
 
 
@@ -138,11 +141,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (CompareTag("Player1") && Input.GetKeyDown(KeyCode.Space))
+        if (CompareTag("Player1") && Input.GetKeyDown(KeyCode.Space) && canBlock)
         {
             StartCoroutine(Block());
         }
-        else if (CompareTag("Player2") && Input.GetKeyDown(KeyCode.Return))
+        else if (CompareTag("Player2") && Input.GetKeyDown(KeyCode.Return) && canBlock)
         {
             StartCoroutine(Block());
         }
@@ -157,6 +160,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        opponentCombat.totalDamageDealt += damage;
     }
     public void endAttack()
     {
@@ -176,8 +180,8 @@ public class Player : MonoBehaviour
             {
                 if (enemy.isBlocking)
                 {
-                    StartCoroutine(enemy.HasBeenBlocked());
-                    continue;
+                    StartCoroutine(HasBeenBlocked());
+                    return;
                 }
                 enemy.TakeDamage(damage);
                 hitboxTouched = true;
@@ -194,7 +198,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Block()
     {
-        if (anim.GetBool("IsPunching") || anim.GetBool("IsKicking") || anim.GetBool("IsJabing"))
+        if (!canBlock || anim.GetBool("IsPunching") || anim.GetBool("IsKicking") || anim.GetBool("IsJabing"))
             yield break;
         isBlocking = true;
         canAttack = false;
@@ -205,13 +209,18 @@ public class Player : MonoBehaviour
         canAttack = true;
         playerMovement.runSpeed = 40f;
         spriteRenderer.color = Color.white;
+
+        canBlock = false;
+        yield return new WaitForSeconds(blockCooldown);
+        canBlock = true;
     }
 
     IEnumerator HasBeenBlocked()
     {
+        endAttack();
         canAttack = false;
         playerMovement.runSpeed = 0f;
-        spriteRenderer.color = new Color(1f, 0.5f, 0.5f, 1f);
+        spriteRenderer.color = new Color(1f, 0.5f, 0.5f, 1f); 
         yield return new WaitForSeconds(1f);
         canAttack = true;
         playerMovement.runSpeed = 40f;

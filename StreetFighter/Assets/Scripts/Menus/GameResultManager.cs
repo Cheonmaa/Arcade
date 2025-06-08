@@ -19,13 +19,22 @@ public enum RoundId
 public class GameResultManager : MonoBehaviour
 {
 
-    private static GameResultManager instance;
+    public static GameResultManager instance { get; private set; }
     [Header("Game Result Manager")]
     [SerializeField] private RoundList[] roundList;
     private List<TextMeshProUGUI> texts;
 
     // Update is called once per frame
-    public void Awake(){ instance = this; }
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     void Update()
     {
@@ -34,7 +43,10 @@ public class GameResultManager : MonoBehaviour
 
     public void OnClickRestartButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        VictorySystem.instance.roundOver = false;
+        VictorySystem.instance.victory = false;
+        ResetTexts();
+        SceneManager.LoadScene("SELECTCHAR");
     }
 
     public void OnClickMainMenuButton()
@@ -45,6 +57,31 @@ public class GameResultManager : MonoBehaviour
     public void OnClickQuitButton()
     {
         Application.Quit();
+    }
+
+    public void SetRoundText(RoundId roundId, string text)
+    {
+        foreach (var round in roundList)
+        {
+            if (round.roundId == roundId)
+            {
+                foreach (var t in round.texts)
+                {
+                    t.text = text;
+                }
+            }
+        }
+    }
+    
+    public void ResetTexts()
+    {
+        foreach (var round in roundList)
+        {
+            foreach (var t in round.texts)
+            {
+                t.text = string.Empty;
+            }
+        }
     }
 }
 
