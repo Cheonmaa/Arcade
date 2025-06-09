@@ -2653,6 +2653,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &797657129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 797657131}
+  - component: {fileID: 797657130}
+  m_Layer: 0
+  m_Name: Esp32InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &797657130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797657129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f414917f031584cb092e1d8edfac48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonState1P1: 0
+  buttonState2P1: 0
+  buttonState1P2: 0
+  buttonState2P2: 0
+  x1: 0
+  y1: 0
+  x2: 0
+  y2: 0
+  debug: 0
+--- !u!4 &797657131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797657129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 616.828, y: 282.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &858928818
 GameObject:
   m_ObjectHideFlags: 0
@@ -4774,7 +4827,6 @@ MonoBehaviour:
   panelsList:
   - {fileID: 2122131204}
   - {fileID: 48686918}
-  - {fileID: 0}
 --- !u!1 &2074385684
 GameObject:
   m_ObjectHideFlags: 0
@@ -5233,3 +5285,4 @@ SceneRoots:
   - {fileID: 365408618}
   - {fileID: 1122019990}
   - {fileID: 785205184}
+  - {fileID: 797657131}
