@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [Header("ESP32 Input Reader")]
-    public SerialReader esp32InputReader;
+    public Esp32InputReader esp32InputReader;
 
     [Header("Player Settings")]
     public int maxHealth = 100;
@@ -79,12 +79,6 @@ public class Player : MonoBehaviour
         /*
         void Update() //esp32 version
         {*/
-        if (debug)
-        {
-            Debug.Log("x1: " + esp32InputReader.x1 + "  y1:" + esp32InputReader.y1);
-            Debug.Log("x2: " + esp32InputReader.x2 + "  y2:" + esp32InputReader.y2);
-        }
-
         if (Input.GetKey(KeyCode.L)) // end round
         {
             GameManager.RoundNumber++;
@@ -99,20 +93,14 @@ public class Player : MonoBehaviour
                 if (esp32InputReader.y1 == 1)
                 {
                     anim.SetBool("IsKicking", true);
-                    if (debug)
-                        Debug.Log("Kick");
                 }
                 else if (esp32InputReader.x1 == 1)
                 {
                     anim.SetBool("IsJabing", true);
-                    if (debug)
-                        Debug.Log("Jab");
                 }
                 else
                 {
                     anim.SetBool("IsPunching", true);
-                    if (debug)
-                        Debug.Log("Punch");
                 }
             }
         }
@@ -123,20 +111,14 @@ public class Player : MonoBehaviour
                 if (esp32InputReader.y2 == 1)
                 {
                     anim.SetBool("IsKicking", true);
-                    if (debug)
-                        Debug.Log("Kick");
                 }
                 else if (esp32InputReader.x2 == -1)
                 {
                     anim.SetBool("IsJabing", true);
-                    if (debug)
-                        Debug.Log("Jab");
                 }
                 else
                 {
                     anim.SetBool("IsPunching", true);
-                    if (debug)
-                        Debug.Log("Punch");
                 }
             }
         }
@@ -151,7 +133,11 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player has no tag or tag not detected");
+            if (debug)
+            {
+                Debug.Log("Player has no tag or tag not detected");
+            }
+            
         }
     }
 

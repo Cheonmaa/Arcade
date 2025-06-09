@@ -5,7 +5,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("ESP32 Input Reader")]
-    public SerialReader esp32InputReader;
+    public Esp32InputReader esp32InputReader;
 
     [Header("Character Controller")]
     public CharacterController2D controller;
