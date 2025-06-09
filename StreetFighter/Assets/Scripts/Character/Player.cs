@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() // PC version
+    /*void Update() // PC version
     {
         if (Input.GetMouseButtonDown(0) && canAttack && !isBlocking)
         {
@@ -75,26 +75,17 @@ public class Player : MonoBehaviour
                 anim.SetBool("IsPunching", true);
             }
         }
-        //}
-        /*
-        void Update() //esp32 version
-        {*/
-        if (Input.GetKey(KeyCode.L)) // end round
-        {
-            GameManager.RoundNumber++;
-            SceneManager.LoadScene("SELECTCHAR");
-        }
 
-        if (CompareTag("Player1"))
+        if (CompareTag("Player1")) //WASD
         {
-            if (esp32InputReader.buttonState1P1 && canAttack)
+            if (Input.GetMouseButtonDown(0) && canAttack && !isBlocking)
             {
 
-                if (esp32InputReader.y1 == 1)
+                if (Input.GetKey(KeyCode.S))
                 {
                     anim.SetBool("IsKicking", true);
                 }
-                else if (esp32InputReader.x1 == 1)
+                else if (Input.GetKey(KeyCode.D)
                 {
                     anim.SetBool("IsJabing", true);
                 }
@@ -104,15 +95,15 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (CompareTag("Player2"))
+        else if (CompareTag("Player2")) // IJKL
         {
-            if (esp32InputReader.buttonState1P2 && canAttack)
+            if (Input.GetMouseButtonDown(1) && canAttack && !isBlocking)
             {
-                if (esp32InputReader.y2 == 1)
+                if (Input.GetKey(KeyCode.K))
                 {
                     anim.SetBool("IsKicking", true);
                 }
-                else if (esp32InputReader.x2 == -1)
+                else if (Input.GetKey(KeyCode.L))
                 {
                     anim.SetBool("IsJabing", true);
                 }
@@ -133,11 +124,73 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (debug)
+            Debug.Log("Player has no tag or tag not detected");
+        }
+    }*/
+        
+        void Update() //esp32 version
+        {
+
+        if (Input.GetKey(KeyCode.P)) // end round
+        {
+            GameManager.RoundNumber++;
+            SceneManager.LoadScene("SELECTCHAR");
+        }
+
+        if (CompareTag("Player1"))
+        {
+            if (esp32InputReader.buttonState1P1 && canAttack && !isBlocking)
             {
-                Debug.Log("Player has no tag or tag not detected");
+
+                if (esp32InputReader.y1 == 1)
+                {
+                    anim.SetBool("IsKicking", true);
+                }
+                else if (esp32InputReader.x1 == 1)
+                {
+                    anim.SetBool("IsJabing", true);
+                }
+                else
+                {
+                    anim.SetBool("IsPunching", true);
+                }
             }
-            
+        }
+        else if (CompareTag("Player2"))
+        {
+            if (esp32InputReader.buttonState1P2 && canAttack && !isBlocking)
+            {
+                if (esp32InputReader.y2 == 1)
+                {
+                    anim.SetBool("IsKicking", true);
+                }
+                else if (esp32InputReader.x2 == -1)
+                {
+                    anim.SetBool("IsJabing", true);
+                }
+                else
+                {
+                    anim.SetBool("IsPunching", true);
+                }
+            }
+        }
+
+        if (CompareTag("Player1")) {
+            if (esp32InputReader.buttonState2P1 && canBlock)
+            {
+                StartCoroutine(Block());
+            }
+        }
+        else if (CompareTag("Player2"))
+        {
+            if (esp32InputReader.buttonState2P2 && canBlock)
+            {
+                StartCoroutine(Block());
+            }
+        }
+        else
+        {
+            Debug.Log("Player has no tag or tag not detected");
         }
     }
 

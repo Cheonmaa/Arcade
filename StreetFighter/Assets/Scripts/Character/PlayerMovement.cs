@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     bool crouch = false;
 
     // Update is called once per frame
-    void Update()   //PC version
+    /*void Update()   //PC version
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -44,10 +44,10 @@ public class PlayerMovement : MonoBehaviour
         {
             crouch = false;
         }
-    }
+    }*/
 
 
-/*void Update()   //esp32 version
+    void Update()   //esp32 version
     {
         if (CompareTag("Player1"))
         {
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Player has no tag or tag not detected");
         }
         
-    }*/
+    }
 
     public void OnLanding()
     {
