@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Canvas), typeof(CanvasGroup))]
 public class MenuPanel : MonoBehaviour
 {
 
     [SerializeField] private PanelType type;
+    [SerializeField] private GameObject closeBtn;
+    [SerializeField] private GameObject playBtn;
+
     [Header("Animation")]
     [SerializeField] private float animationTime;
     [SerializeField] private AnimationCurve animCurve = new AnimationCurve();
@@ -25,6 +29,15 @@ public class MenuPanel : MonoBehaviour
         StopAllCoroutines();
         if (_animate) StartCoroutine(Animate(state));
         else canvas.enabled = state;
+
+        if (gameObject.name == "Options")
+        {
+            EventSystem.current.SetSelectedGameObject(closeBtn);
+        }
+        else if (gameObject.name == "MenuPanel")
+        {
+            EventSystem.current.SetSelectedGameObject(playBtn);
+        }
     }
 
     private IEnumerator Animate(bool _state)
