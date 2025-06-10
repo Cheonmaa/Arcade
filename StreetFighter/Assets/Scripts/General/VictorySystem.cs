@@ -50,6 +50,7 @@ public class VictorySystem : MonoBehaviour
     void Update()
     {
         WinCondition();
+        RoundOver();
     }
 
     public void RoundOver()
