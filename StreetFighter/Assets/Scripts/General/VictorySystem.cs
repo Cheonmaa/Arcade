@@ -77,8 +77,8 @@ public class VictorySystem : MonoBehaviour
     {
         WinCondition();
         RoundOver();
-        GetPlayer1Stats();
-        GetPlayer2Stats();
+        //GetPlayer1Stats();
+        //GetPlayer2Stats();
     }
 
     public void RoundOver()
@@ -175,23 +175,15 @@ public class VictorySystem : MonoBehaviour
         }
     }
 
-    public int GetPlayer1Stats()
+    /*public int GetPlayer1Stats()
     {
-        if (roundOver)
-        {
-            player1CurrentHealth = GameStats.instance.player1RemainingHealth;
-            return player1CurrentHealth;
-        }
+        if (roundOver) return GameStats.instance.player1RemainingHealth;
         GameStats.instance.ResetPlayerStats();
     }
 
     public int GetPlayer2Stats()
     {
-        if (roundOver)
-        {
-            player2CurrentHealth = GameStats.instance.player2RemainingHealth;
-            return player2CurrentHealth;
-        }
+        if (roundOver) return GameStats.instance.player2RemainingHealth;
         GameStats.instance.ResetPlayerStats();
-    }
+    }*/
 }

@@ -36,11 +36,6 @@ public class GameResultManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    void Start()
-    {
-        SetRoundTexts(VictorySystem.instance.roundsPlayed);
-    }
-
     public void OnClickRestartButton()
     {
         VictorySystem.instance.roundOver = false;
