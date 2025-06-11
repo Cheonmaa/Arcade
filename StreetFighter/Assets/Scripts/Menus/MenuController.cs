@@ -8,8 +8,7 @@ public enum PanelType
     None,
     Main,
     Options,
-    Credits,
-    ScoreBoard,
+    Info,
 }
 
 public class MenuController : MonoBehaviour

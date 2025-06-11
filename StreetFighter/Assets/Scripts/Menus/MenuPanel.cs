@@ -8,8 +8,9 @@ public class MenuPanel : MonoBehaviour
 {
 
     [SerializeField] private PanelType type;
-    [SerializeField] private GameObject closeBtn;
+    [SerializeField] private GameObject closeOptionBtn;
     [SerializeField] private GameObject playBtn;
+    [SerializeField] private GameObject closeInfoBtn;
 
     [Header("Animation")]
     [SerializeField] private float animationTime;
@@ -32,11 +33,15 @@ public class MenuPanel : MonoBehaviour
 
         if (gameObject.name == "Options")
         {
-            EventSystem.current.SetSelectedGameObject(closeBtn);
+            EventSystem.current.SetSelectedGameObject(closeOptionBtn);
         }
         else if (gameObject.name == "MenuPanel")
         {
             EventSystem.current.SetSelectedGameObject(playBtn);
+        }
+        else if (gameObject.name == "Info")
+        {
+            EventSystem.current.SetSelectedGameObject(closeInfoBtn);
         }
     }
 
