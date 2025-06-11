@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    [Header("ESP32 Input Reader")]
-    public Esp32InputReader esp32InputReader;
 
     [Header("Player Settings")]
     public int maxHealth = 100;
@@ -139,14 +137,14 @@ public class Player : MonoBehaviour
 
         if (CompareTag("Player1"))
         {
-            if (esp32InputReader.buttonState1P1 && canAttack && !isBlocking)
+            if (Esp32InputReader.Instance.buttonState1P1 && canAttack && !isBlocking)
             {
 
-                if (esp32InputReader.y1 == 1)
+                if (Esp32InputReader.Instance.y1 == 1)
                 {
                     anim.SetBool("IsKicking", true);
                 }
-                else if (esp32InputReader.x1 == 1)
+                else if (Esp32InputReader.Instance.x1 == 1)
                 {
                     anim.SetBool("IsJabing", true);
                 }
@@ -158,13 +156,13 @@ public class Player : MonoBehaviour
         }
         else if (CompareTag("Player2"))
         {
-            if (esp32InputReader.buttonState1P2 && canAttack && !isBlocking)
+            if (Esp32InputReader.Instance.buttonState1P2 && canAttack && !isBlocking)
             {
-                if (esp32InputReader.y2 == 1)
+                if (Esp32InputReader.Instance.y2 == 1)
                 {
                     anim.SetBool("IsKicking", true);
                 }
-                else if (esp32InputReader.x2 == -1)
+                else if (Esp32InputReader.Instance.x2 == -1)
                 {
                     anim.SetBool("IsJabing", true);
                 }
@@ -176,14 +174,14 @@ public class Player : MonoBehaviour
         }
 
         if (CompareTag("Player1")) {
-            if (esp32InputReader.buttonState2P1 && canBlock)
+            if (Esp32InputReader.Instance.buttonState2P1 && canBlock)
             {
                 StartCoroutine(Block());
             }
         }
         else if (CompareTag("Player2"))
         {
-            if (esp32InputReader.buttonState2P2 && canBlock)
+            if (Esp32InputReader.Instance.buttonState2P2 && canBlock)
             {
                 StartCoroutine(Block());
             }

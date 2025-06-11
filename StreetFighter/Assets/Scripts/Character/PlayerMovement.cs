@@ -51,9 +51,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CompareTag("Player1"))
         {
-            horizontalMove = esp32InputReader.x1 * runSpeed;
+            horizontalMove = Esp32InputReader.Instance.x1 * runSpeed;
             animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-            if (esp32InputReader.x1 != 0)
+            if (Esp32InputReader.Instance.x1 != 0)
             {
                 animator.SetBool("IsWalking", true);
             }
@@ -61,13 +61,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("IsWalking", false);
             }
-            if (esp32InputReader.y1 == -1)
+            if (Esp32InputReader.Instance.y1 == -1)
             {
                 jump = true;
                 animator.SetBool("IsJumping", true);
             }
 
-            if (esp32InputReader.y1 == 1)
+            if (Esp32InputReader.Instance.y1 == 1)
             {
                 crouch = true;
             }
@@ -78,9 +78,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (CompareTag("Player2"))
         {
-            horizontalMove = esp32InputReader.x2 * runSpeed;
+            horizontalMove = Esp32InputReader.Instance.x2 * runSpeed;
             animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-            if (esp32InputReader.x2 != 0)
+            if (Esp32InputReader.Instance.x2 != 0)
             {
                 animator.SetBool("IsWalking", true);
             }
@@ -88,13 +88,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("IsWalking", false);
             }
-            if (esp32InputReader.y2 == -1)
+            if (Esp32InputReader.Instance.y2 == -1)
             {
                 jump = true;
                 animator.SetBool("IsJumping", true);
             }
 
-            if (esp32InputReader.y2 == 1)
+            if (Esp32InputReader.Instance.y2 == 1)
             {
                 crouch = true;
             }

@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3fcac8096cae24ba79513ef3faf2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  esp32InputReader: {fileID: 798340611}
+  esp32InputReader: {fileID: 0}
   controller: {fileID: 562258987}
   animator: {fileID: 562258991}
   runSpeed: 40
@@ -1677,7 +1677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f8dddb2c531eb408793a4977b7056e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  esp32InputReader: {fileID: 798340611}
+  esp32InputReader: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
   damage: 10
@@ -2158,59 +2158,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2132018711}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &798340610
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 798340612}
-  - component: {fileID: 798340611}
-  m_Layer: 0
-  m_Name: Esp32InputReader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &798340611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798340610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f414917f031584cb092e1d8edfac48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonState1P1: 0
-  buttonState2P1: 0
-  buttonState1P2: 0
-  buttonState2P2: 0
-  x1: 0
-  y1: 0
-  x2: 0
-  y2: 0
-  debug: 0
---- !u!4 &798340612
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798340610}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &800213428
 GameObject:
@@ -5315,7 +5262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f8dddb2c531eb408793a4977b7056e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  esp32InputReader: {fileID: 798340611}
+  esp32InputReader: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
   damage: 10
@@ -5366,7 +5313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3fcac8096cae24ba79513ef3faf2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  esp32InputReader: {fileID: 798340611}
+  esp32InputReader: {fileID: 0}
   controller: {fileID: 2132018708}
   animator: {fileID: 2132018704}
   runSpeed: 40
@@ -5602,7 +5549,6 @@ SceneRoots:
   - {fileID: 562258985}
   - {fileID: 2132018711}
   - {fileID: 932653785}
-  - {fileID: 798340612}
   - {fileID: 1519342383}
   - {fileID: 832405314}
   - {fileID: 2051272657}

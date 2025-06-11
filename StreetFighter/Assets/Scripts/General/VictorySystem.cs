@@ -23,6 +23,7 @@ public class VictorySystem : MonoBehaviour
 
     public void AnnounceWinner(Player deadPlayer)
     {
+        if (deadPlayer == null) return;
         string winnerTag = (deadPlayer.tag == "Player1") ? "Player2" : "Player1";
         currentRoundText.text = $"{winnerTag} won!";
     }
@@ -30,7 +31,7 @@ public class VictorySystem : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null && instance != this)
         {
             Destroy(this);
             return;
@@ -55,6 +56,7 @@ public class VictorySystem : MonoBehaviour
 
     public void RoundOver()
     {
+        if (player1 == null || player2 == null) return;
         if (player1.currentHealth <= 0 || player2.currentHealth <= 0)
         {
             roundOver = true;
@@ -71,6 +73,7 @@ public class VictorySystem : MonoBehaviour
 
     public void WinCondition()
     {
+        if (player1 == null || player2 == null) return;
         if (player1.currentHealth <= 0)
         {
             AnnounceWinner(player1);
