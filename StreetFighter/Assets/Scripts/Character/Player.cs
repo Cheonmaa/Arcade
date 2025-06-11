@@ -124,70 +124,79 @@ public class Player : MonoBehaviour
 
     void Update() //esp32 version
     {
-    if (CompareTag("Player1"))
-    {
-        if (Esp32InputReader.Instance.buttonState1P1 && canAttack && !isBlocking)
+        if (CompareTag("Player1"))
         {
+            if (Esp32InputReader.Instance.buttonState1P1 && canAttack && !isBlocking)
+            {
 
-            if (Esp32InputReader.Instance.y1 == 1)
-            {
-                anim.SetBool("IsKicking", true);
-            }
-            else if (Esp32InputReader.Instance.x1 == 1)
-            {
-                anim.SetBool("IsJabing", true);
-            }
-            else
-            {
-                anim.SetBool("IsPunching", true);
+                if (Esp32InputReader.Instance.y1 == 1)
+                {
+                    anim.SetBool("IsKicking", true);
+                }
+                else if (Esp32InputReader.Instance.x1 == 1)
+                {
+                    anim.SetBool("IsJabing", true);
+                }
+                else
+                {
+                    anim.SetBool("IsPunching", true);
+                }
             }
         }
-    }
-    else if (CompareTag("Player2"))
-    {
-        if (Esp32InputReader.Instance.buttonState1P2 && canAttack && !isBlocking)
+        else if (CompareTag("Player2"))
         {
-            if (Esp32InputReader.Instance.y2 == 1)
+            if (Esp32InputReader.Instance.buttonState1P2 && canAttack && !isBlocking)
             {
-                anim.SetBool("IsKicking", true);
-            }
-            else if (Esp32InputReader.Instance.x2 == -1)
-            {
-                anim.SetBool("IsJabing", true);
-            }
-            else
-            {
-                anim.SetBool("IsPunching", true);
+                if (Esp32InputReader.Instance.y2 == 1)
+                {
+                    anim.SetBool("IsKicking", true);
+                }
+                else if (Esp32InputReader.Instance.x2 == -1)
+                {
+                    anim.SetBool("IsJabing", true);
+                }
+                else
+                {
+                    anim.SetBool("IsPunching", true);
+                }
             }
         }
-    }
 
-    if (CompareTag("Player1")) {
-        if (Esp32InputReader.Instance.buttonState2P1 && canBlock)
+        if (CompareTag("Player1"))
         {
-            StartCoroutine(Block());
+            if (Esp32InputReader.Instance.buttonState2P1 && canBlock)
+            {
+                StartCoroutine(Block());
+            }
+        }
+        else if (CompareTag("Player2"))
+        {
+            if (Esp32InputReader.Instance.buttonState2P2 && canBlock)
+            {
+                StartCoroutine(Block());
+            }
+        }
+        else
+        {
+            Debug.Log("Player has no tag or tag not detected");
         }
     }
-    else if (CompareTag("Player2"))
-    {
-        if (Esp32InputReader.Instance.buttonState2P2 && canBlock)
-        {
-            StartCoroutine(Block());
-        }
-    }
-    else
-    {
-        Debug.Log("Player has no tag or tag not detected");
-    }
-}
 
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-        opponentCombat.totalDamageDealt += damage;
+        if (this.tag == "Player1")
+        {
+            GameStats.instance.player2TotalDamageDealt += damage;
+        }
+        else if (this.tag == "Player2")
+        {
+            GameStats.instance.player1TotalDamageDealt += damage;
+        }
     }
+
     public void endAttack()
     {
         anim.SetBool("IsPunching", false);
@@ -252,4 +261,5 @@ public class Player : MonoBehaviour
         playerMovement.runSpeed = 40f;
         spriteRenderer.color = Color.white;
     }
+
 }

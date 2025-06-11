@@ -36,9 +36,9 @@ public class GameResultManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    void Update()
+    void Start()
     {
-
+        SetRoundTexts(VictorySystem.instance.roundsPlayed);
     }
 
     public void OnClickRestartButton()

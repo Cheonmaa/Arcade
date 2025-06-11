@@ -77,12 +77,14 @@ public class VictorySystem : MonoBehaviour
     {
         WinCondition();
         RoundOver();
+        GetPlayer1Stats();
+        GetPlayer2Stats();
     }
 
     public void RoundOver()
     {
         if (player1 == null || player2 == null) return;
-        
+
         if (player1.currentHealth <= 0 || player2.currentHealth <= 0 && victory == false)
         {
             PlayerGetWins();
@@ -97,7 +99,7 @@ public class VictorySystem : MonoBehaviour
                 LoadNextScene();
                 GameManager.instance.ChangeScene("SELECTCHAR");
             }
-            
+
         }
     }
 
@@ -171,5 +173,25 @@ public class VictorySystem : MonoBehaviour
             StartCoroutine(VictoryScreen());
             return;
         }
+    }
+
+    public int GetPlayer1Stats()
+    {
+        if (roundOver)
+        {
+            player1CurrentHealth = GameStats.instance.player1RemainingHealth;
+            return player1CurrentHealth;
+        }
+        GameStats.instance.ResetPlayerStats();
+    }
+
+    public int GetPlayer2Stats()
+    {
+        if (roundOver)
+        {
+            player2CurrentHealth = GameStats.instance.player2RemainingHealth;
+            return player2CurrentHealth;
+        }
+        GameStats.instance.ResetPlayerStats();
     }
 }
