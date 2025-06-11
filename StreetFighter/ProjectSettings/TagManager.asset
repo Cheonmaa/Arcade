@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Player1
   - Player2
+  - CurrentRounds
+  - playerName
+  - playerName2
   layers:
   - Default
   - TransparentFX

@@ -1057,7 +1057,7 @@ GameObject:
   - component: {fileID: 398033009}
   m_Layer: 0
   m_Name: playerName
-  m_TagString: Untagged
+  m_TagString: playerName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1258,7 +1258,7 @@ GameObject:
   - component: {fileID: 501927115}
   m_Layer: 0
   m_Name: playerName2
-  m_TagString: Untagged
+  m_TagString: playerName2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1677,7 +1677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f8dddb2c531eb408793a4977b7056e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  esp32InputReader: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
   damage: 10
@@ -3779,7 +3778,7 @@ GameObject:
   - component: {fileID: 1094258741}
   m_Layer: 0
   m_Name: CurrentRounds
-  m_TagString: Untagged
+  m_TagString: CurrentRounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5262,7 +5261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f8dddb2c531eb408793a4977b7056e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  esp32InputReader: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
   damage: 10

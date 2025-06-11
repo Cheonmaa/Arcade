@@ -7,12 +7,8 @@ public class SceneData : MonoBehaviour
 
     void Start()
     {
-        if (GameStats.instance == null)
-        {
-            roundText.text = "Round 1";
-            return;
-        }
-        roundText.text = $"Round {GameStats.instance.roundsPlayed}";
+        int round = GameStats.instance != null ? GameStats.instance.roundsPlayed + 1 : 1;
+        roundText.text = $"Round {round}";
     }
 
     // Update is called once per frame

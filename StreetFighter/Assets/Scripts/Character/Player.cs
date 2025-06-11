@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
                 {
                     anim.SetBool("IsKicking", true);
                 }
-                else if (Input.GetKey(KeyCode.D)
+                else if (Input.GetKey(KeyCode.D))
                 {
                     anim.SetBool("IsJabing", true);
                 }
@@ -120,70 +120,66 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Block());
         }
-        else
-        {
-            Debug.Log("Player has no tag or tag not detected");
-        }
     }*/
-        
-        void Update() //esp32 version
-        {
-        if (CompareTag("Player1"))
-        {
-            if (Esp32InputReader.Instance.buttonState1P1 && canAttack && !isBlocking)
-            {
 
-                if (Esp32InputReader.Instance.y1 == 1)
-                {
-                    anim.SetBool("IsKicking", true);
-                }
-                else if (Esp32InputReader.Instance.x1 == 1)
-                {
-                    anim.SetBool("IsJabing", true);
-                }
-                else
-                {
-                    anim.SetBool("IsPunching", true);
-                }
-            }
-        }
-        else if (CompareTag("Player2"))
+    void Update() //esp32 version
+    {
+    if (CompareTag("Player1"))
+    {
+        if (Esp32InputReader.Instance.buttonState1P1 && canAttack && !isBlocking)
         {
-            if (Esp32InputReader.Instance.buttonState1P2 && canAttack && !isBlocking)
-            {
-                if (Esp32InputReader.Instance.y2 == 1)
-                {
-                    anim.SetBool("IsKicking", true);
-                }
-                else if (Esp32InputReader.Instance.x2 == -1)
-                {
-                    anim.SetBool("IsJabing", true);
-                }
-                else
-                {
-                    anim.SetBool("IsPunching", true);
-                }
-            }
-        }
 
-        if (CompareTag("Player1")) {
-            if (Esp32InputReader.Instance.buttonState2P1 && canBlock)
+            if (Esp32InputReader.Instance.y1 == 1)
             {
-                StartCoroutine(Block());
+                anim.SetBool("IsKicking", true);
             }
-        }
-        else if (CompareTag("Player2"))
-        {
-            if (Esp32InputReader.Instance.buttonState2P2 && canBlock)
+            else if (Esp32InputReader.Instance.x1 == 1)
             {
-                StartCoroutine(Block());
+                anim.SetBool("IsJabing", true);
             }
-        }
-        else
-        {
-            Debug.Log("Player has no tag or tag not detected");
+            else
+            {
+                anim.SetBool("IsPunching", true);
+            }
         }
     }
+    else if (CompareTag("Player2"))
+    {
+        if (Esp32InputReader.Instance.buttonState1P2 && canAttack && !isBlocking)
+        {
+            if (Esp32InputReader.Instance.y2 == 1)
+            {
+                anim.SetBool("IsKicking", true);
+            }
+            else if (Esp32InputReader.Instance.x2 == -1)
+            {
+                anim.SetBool("IsJabing", true);
+            }
+            else
+            {
+                anim.SetBool("IsPunching", true);
+            }
+        }
+    }
+
+    if (CompareTag("Player1")) {
+        if (Esp32InputReader.Instance.buttonState2P1 && canBlock)
+        {
+            StartCoroutine(Block());
+        }
+    }
+    else if (CompareTag("Player2"))
+    {
+        if (Esp32InputReader.Instance.buttonState2P2 && canBlock)
+        {
+            StartCoroutine(Block());
+        }
+    }
+    else
+    {
+        Debug.Log("Player has no tag or tag not detected");
+    }
+}
 
 
     public void TakeDamage(int damage)
@@ -250,7 +246,7 @@ public class Player : MonoBehaviour
         endAttack();
         canAttack = false;
         playerMovement.runSpeed = 0f;
-        spriteRenderer.color = new Color(1f, 0.5f, 0.5f, 1f); 
+        spriteRenderer.color = new Color(1f, 0.5f, 0.5f, 1f);
         yield return new WaitForSeconds(1f);
         canAttack = true;
         playerMovement.runSpeed = 40f;

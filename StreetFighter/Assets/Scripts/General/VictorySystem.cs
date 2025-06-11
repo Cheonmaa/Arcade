@@ -40,6 +40,30 @@ public class VictorySystem : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += (_, __) => UpdateUI();
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= (_, __) => UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        InstantiateVariables();
+
+        if (currentRoundText != null)
+            currentRoundText.text = $"Round {GameStats.instance.roundsPlayed + 1}";
+
+        if (playerName != null && player1 != null)
+            playerName.text = player1.tag;
+
+        if (player2Name != null && player2 != null)
+            player2Name.text = player2.tag;
+    }
+
     public void Start()
     {
         InstantiateVariables();
@@ -47,7 +71,7 @@ public class VictorySystem : MonoBehaviour
         roundOver = false;
         playerName.text = player1.tag;
         player2Name.text = player2.tag;
-        currentRoundText.text = $"Round {GameStats.instance.roundsPlayed + 1}";
+        currentRoundText.text = $"Round {GameStats.instance.roundsPlayed + 1} ";
     }
     void Update()
     {
@@ -58,19 +82,25 @@ public class VictorySystem : MonoBehaviour
     public void RoundOver()
     {
         if (player1 == null || player2 == null) return;
-        if (player1.currentHealth <= 0 || player2.currentHealth <= 0)
+        
+        if (player1.currentHealth <= 0 || player2.currentHealth <= 0 && victory == false)
         {
+            PlayerGetWins();
             roundOver = true;
             GameStats.instance.roundsPlayed++;
-            if (GameStats.instance.roundsPlayed >= 3)
+            if (GameStats.instance.player1Score >= 2 || GameStats.instance.player2Score >= 2)
             {
-                victory = true;
-                GameStats.instance.ResetStats();
-                StartCoroutine(VictoryScreen());
+                OnVictory();
             }
-            SceneManager.LoadScene("SELECTCHAR");
+            else
+            {
+                LoadNextScene();
+                GameManager.instance.ChangeScene("SELECTCHAR");
+            }
+            
         }
     }
+
 
     public void WinCondition()
     {
@@ -87,8 +117,8 @@ public class VictorySystem : MonoBehaviour
 
     IEnumerator VictoryScreen()
     {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Resume");
+        yield return new WaitForSeconds(5f);
+        GameManager.instance.ChangeScene("Resume");
     }
 
     private void InstantiateVariables()
@@ -103,15 +133,43 @@ public class VictorySystem : MonoBehaviour
         }
         if (currentRoundText == null)
         {
-            currentRoundText = GameObject.Find("CurrentRoundText")?.GetComponent<TextMeshProUGUI>();
+            currentRoundText = GameObject.FindWithTag("CurrentRounds")?.GetComponent<TextMeshProUGUI>();
         }
         if (playerName == null)
         {
-            playerName = GameObject.Find("Player1Name")?.GetComponent<TextMeshProUGUI>();
+            playerName = GameObject.FindWithTag("playerName")?.GetComponent<TextMeshProUGUI>();
         }
         if (player2Name == null)
         {
-            player2Name = GameObject.Find("Player2Name")?.GetComponent<TextMeshProUGUI>();
+            player2Name = GameObject.FindWithTag("playerName2")?.GetComponent<TextMeshProUGUI>();
+        }
+    }
+
+    public void PlayerGetWins()
+    {
+        if (player1.currentHealth <= 0)
+        {
+            GameStats.instance.player2Score++;
+        }
+        else if (player2.currentHealth <= 0)
+        {
+            GameStats.instance.player1Score++;
+        }
+    }
+
+    IEnumerator LoadNextScene()
+    {
+        yield return new WaitForSeconds(3f);
+    }
+
+    public void OnVictory()
+    {
+        if (GameStats.instance.player1Score >= 2 || GameStats.instance.player2Score >= 2)
+        {
+            if (victory) return;
+            victory = true;
+            StartCoroutine(VictoryScreen());
+            return;
         }
     }
 }
