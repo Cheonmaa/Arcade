@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { private set; get; }
-    public static int RoundNumber = 1;
 
     private void Awake()
     {

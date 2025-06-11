@@ -42,6 +42,7 @@ public class VictorySystem : MonoBehaviour
 
     public void Start()
     {
+        InstantiateVariables();
         victory = false;
         roundOver = false;
         playerName.text = player1.tag;
@@ -88,5 +89,29 @@ public class VictorySystem : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Resume");
+    }
+
+    private void InstantiateVariables()
+    {
+        if (player1 == null)
+        {
+            player1 = GameObject.FindWithTag("Player1")?.GetComponent<Player>();
+        }
+        if (player2 == null)
+        {
+            player2 = GameObject.FindWithTag("Player2")?.GetComponent<Player>();
+        }
+        if (currentRoundText == null)
+        {
+            currentRoundText = GameObject.Find("CurrentRoundText")?.GetComponent<TextMeshProUGUI>();
+        }
+        if (playerName == null)
+        {
+            playerName = GameObject.Find("Player1Name")?.GetComponent<TextMeshProUGUI>();
+        }
+        if (player2Name == null)
+        {
+            player2Name = GameObject.Find("Player2Name")?.GetComponent<TextMeshProUGUI>();
+        }
     }
 }
