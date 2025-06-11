@@ -128,13 +128,6 @@ public class Player : MonoBehaviour
         
         void Update() //esp32 version
         {
-
-        if (Input.GetKey(KeyCode.P)) // end round
-        {
-            GameManager.RoundNumber++;
-            SceneManager.LoadScene("SELECTCHAR");
-        }
-
         if (CompareTag("Player1"))
         {
             if (Esp32InputReader.Instance.buttonState1P1 && canAttack && !isBlocking)
