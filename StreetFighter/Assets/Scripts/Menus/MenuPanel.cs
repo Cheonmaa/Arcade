@@ -28,7 +28,7 @@ public class MenuPanel : MonoBehaviour
     private void UpdateState(bool _animate)
     {
         StopAllCoroutines();
-        if (_animate) StartCoroutine(Animate(state));
+        if (_animate && state) StartCoroutine(Animate(state));
         else canvas.enabled = state;
 
         if (gameObject.name == "Options")
