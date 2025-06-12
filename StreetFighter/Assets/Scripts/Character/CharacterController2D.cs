@@ -30,6 +30,12 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
+
+	private void Start()
+	{
+		if (this.tag == "Player2") Flip();
+	}
+
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -111,7 +117,7 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.linearVelocity = Vector3.SmoothDamp(m_Rigidbody2D.linearVelocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
 			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight && this.tag == "Player1")
+			if (move > 0 && !m_FacingRight)
 			{
 				// ... flip the player.
 				Flip();
