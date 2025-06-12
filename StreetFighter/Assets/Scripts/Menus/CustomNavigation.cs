@@ -13,6 +13,7 @@ public class CustomNavigation : MonoBehaviour
 
     void Start()
     {
+        esp32InputReader = GetComponent<Esp32InputReader>();
         eventSystem.SetSelectedGameObject(selectedObject);
     }
 
