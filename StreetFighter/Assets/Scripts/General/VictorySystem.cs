@@ -85,12 +85,9 @@ public class VictorySystem : MonoBehaviour
 
         if (player1.currentHealth <= 0 || player2.currentHealth <= 0 && victory == false)
         {
+            SaveRoundStats(GameStats.instance.roundsPlayed, player1, player2);
             PlayerGetWins();
             roundOver = true;
-            RoundId currentRound = (RoundId)GameStats.instance.roundsPlayed;
-            GameResultManager.instance.SetRoundText(currentRound, 0,$"Damage dealt: {GameStats.instance.player1TotalDamageDealt}\nHealth remaining: {player1.currentHealth}");
-            GameResultManager.instance.SetRoundText(currentRound, 2,$"Damage dealt: {GameStats.instance.player2TotalDamageDealt}\nHealth remaining: {player2.currentHealth}");
-            GameResultManager.instance.SetRoundText(currentRound, 1, $"{GameStats.instance.player1Score} - {GameStats.instance.player2Score}");
             GameStats.instance.roundsPlayed++;
             if (GameStats.instance.player1Score >= 2 || GameStats.instance.player2Score >= 2)
             {
@@ -101,7 +98,6 @@ public class VictorySystem : MonoBehaviour
                 LoadNextScene();
                 GameManager.instance.ChangeScene("SELECTCHAR");
             }
-
         }
     }
 
@@ -176,4 +172,13 @@ public class VictorySystem : MonoBehaviour
             return;
         }
     }
+
+    public void SaveRoundStats(int roundIndex, Player player1, Player player2)
+    {
+        GameStats.instance.player1RemainingHealth[roundIndex] = player1.currentHealth;
+        GameStats.instance.player2RemainingHealth[roundIndex] = player2.currentHealth;
+        GameStats.instance.player1TotalDamageDealt[roundIndex] = player2.maxHealth - player2.currentHealth;
+        GameStats.instance.player2TotalDamageDealt[roundIndex] = player1.maxHealth - player1.currentHealth;
+    }
+
 }

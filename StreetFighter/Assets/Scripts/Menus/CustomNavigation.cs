@@ -11,6 +11,11 @@ public class CustomNavigation : MonoBehaviour
     public float inputDelay = 0.3f;
     private float inputTimer = 0f;
 
+    void Start()
+    {
+        eventSystem.SetSelectedGameObject(selectedObject);
+    }
+
     void Update()
     {
         selectedObject = eventSystem.currentSelectedGameObject;

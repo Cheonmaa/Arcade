@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GameStats : MonoBehaviour
@@ -13,11 +12,20 @@ public class GameStats : MonoBehaviour
     public int roundsPlayed = 0;
 
     [Header("Players stats")]
-    public int player1RemainingHealth;
-    public int player2RemainingHealth;
-    public int player1TotalDamageDealt;
-    public int player2TotalDamageDealt;
+    public int[] player1RemainingHealth = new int[3];
+    public int[] player2RemainingHealth = new int[3];
+    public int[] player1TotalDamageDealt = new int[3];
+    public int[] player2TotalDamageDealt = new int[3];
 
+    [System.Serializable]
+    public struct RoundResult
+    {
+        public string player1Stats;
+        public string score;
+        public string player2Stats;
+    }
+
+    public List<RoundResult> roundResults = new List<RoundResult>();
 
     private void Awake()
     {
@@ -30,18 +38,17 @@ public class GameStats : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void ResetPlayerStats()
-    {
-        player1RemainingHealth = 100; // Assuming full health is 100
-        player2RemainingHealth = 100; // Assuming full health is 100
-        player1TotalDamageDealt = 0;
-        player2TotalDamageDealt = 0;
-    }
-
     public void ResetStats()
     {
+        roundsPlayed = 0;
         player1Score = 0;
         player2Score = 0;
-        roundsPlayed = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            player1RemainingHealth[i] = 100;
+            player2RemainingHealth[i] = 100;
+            player1TotalDamageDealt[i] = 0;
+            player2TotalDamageDealt[i] = 0;
+        }
     }
 }

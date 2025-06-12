@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 316115061}
   esp32InputReader: {fileID: 797657130}
-  selectedObject: {fileID: 0}
+  selectedObject: {fileID: 659436557}
   inputDelay: 0.3
 --- !u!4 &34080822
 Transform:

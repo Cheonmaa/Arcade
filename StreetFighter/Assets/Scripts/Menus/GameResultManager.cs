@@ -21,8 +21,9 @@ public class GameResultManager : MonoBehaviour
 
     public static GameResultManager instance { get; private set; }
     [Header("Game Result Manager")]
-    [SerializeField] private RoundList[] roundList;
-    private List<TextMeshProUGUI> texts;
+    private TextMeshProUGUI[] p1StatsTexts = new TextMeshProUGUI[3];
+    private TextMeshProUGUI[] p2StatsTexts = new TextMeshProUGUI[3];
+    private TextMeshProUGUI[] roundScoreTexts = new TextMeshProUGUI[3];
 
     // Update is called once per frame
     private void Awake()
@@ -36,60 +37,43 @@ public class GameResultManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+        p1StatsTexts[0] = GameObject.FindGameObjectWithTag("StatsRound1")?.GetComponent<TextMeshProUGUI>();
+        p1StatsTexts[1] = GameObject.FindGameObjectWithTag("StatsRound2")?.GetComponent<TextMeshProUGUI>();
+        p1StatsTexts[2] = GameObject.FindGameObjectWithTag("StatsRound3")?.GetComponent<TextMeshProUGUI>();
 
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+        p2StatsTexts[0] = GameObject.FindGameObjectWithTag("StatsRound1P2")?.GetComponent<TextMeshProUGUI>();
+        p2StatsTexts[1] = GameObject.FindGameObjectWithTag("StatsRound2P2")?.GetComponent<TextMeshProUGUI>();
+        p2StatsTexts[2] = GameObject.FindGameObjectWithTag("StatsRound3P2")?.GetComponent<TextMeshProUGUI>();
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        roundScoreTexts[0] = GameObject.FindGameObjectWithTag("Round1")?.GetComponent<TextMeshProUGUI>();
+        roundScoreTexts[1] = GameObject.FindGameObjectWithTag("Round2")?.GetComponent<TextMeshProUGUI>();
+        roundScoreTexts[2] = GameObject.FindGameObjectWithTag("Round3")?.GetComponent<TextMeshProUGUI>();
+
+        UpdateUI();
+    }
+     private void UpdateUI()
     {
-        if (scene.name == "Resume")
+        for (int i = 0; i < 3; i++)
         {
-            texts = new List<TextMeshProUGUI>();
-            List<RoundList> tempRoundList = new List<RoundList>();
-
-            foreach (RoundId roundId in Enum.GetValues(typeof(RoundId)))
+            if (p1StatsTexts[i] != null)
             {
-                string tag1 = $"Stats{roundId}";
-                string tag2 = $"Stats{roundId}P2";
-                string scoreTag = roundId.ToString(); 
-                List<TextMeshProUGUI> tmpList = new List<TextMeshProUGUI>();
-                AddTextFromTag(tmpList, tag1);
-                AddTextFromTag(tmpList, tag2);
-                AddTextFromTag(tmpList, scoreTag);
-                if (tmpList.Count > 0)
-                {
-                    RoundList rl = new RoundList
-                    {
-                        roundId = roundId,
-                        texts = tmpList
-                    };
-                    tempRoundList.Add(rl);
-                }
+                p1StatsTexts[i].text = $"Health: {GameStats.instance.player1RemainingHealth[i]}\nDamage: {GameStats.instance.player1TotalDamageDealt[i]}";
             }
-            roundList = tempRoundList.ToArray();
+            if (p2StatsTexts[i] != null)
+            {
+                p2StatsTexts[i].text = $"Health: {GameStats.instance.player2RemainingHealth[i]}\nDamage: {GameStats.instance.player2TotalDamageDealt[i]}";
+            }
+            if (roundScoreTexts[i] != null)
+            {
+                int p1ScoreForRound = (GameStats.instance.player1RemainingHealth[i] > GameStats.instance.player2RemainingHealth[i]) ? 1 : 0;
+                int p2ScoreForRound = (GameStats.instance.player2RemainingHealth[i] > GameStats.instance.player1RemainingHealth[i]) ? 1 : 0;
+                roundScoreTexts[i].text = $"{p1ScoreForRound} - {p2ScoreForRound}";
+            }
         }
     }
     
-    private void AddTextFromTag(List<TextMeshProUGUI> list, string tag)
-    {
-        GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(tag);
-        foreach (GameObject obj in taggedObjects)
-        {
-            TextMeshProUGUI tmp = obj.GetComponent<TextMeshProUGUI>();
-            if (tmp != null && !list.Contains(tmp))
-            {
-                list.Add(tmp);
-                texts.Add(tmp);
-            }
-        }
-    }
-
     public void OnClickRestartButton()
     {
         VictorySystem.instance.roundOver = false;
@@ -108,56 +92,22 @@ public class GameResultManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetRoundText(RoundId roundId, int textIndex, string text)
-    {
-        foreach (var round in roundList)
-        {
-            if (round.roundId == roundId)
-            {
-                if (textIndex >= 0 && textIndex < round.texts.Count)
-                {
-                    round.texts[textIndex].text = text;
-                }
-            }
-        }
-    }
-
-
     public void ResetTexts()
     {
-        foreach (var round in roundList)
+        for (int i = 0; i < 3; i++)
         {
-            foreach (var t in round.texts)
+            if (p1StatsTexts[i] != null)
             {
-                t.text = string.Empty;
+                p1StatsTexts[i].text = "Health: 0\nDamage: 0";
+            }
+            if (p2StatsTexts[i] != null)
+            {
+                p2StatsTexts[i].text = "Health: 0\nDamage: 0";
+            }
+            if (roundScoreTexts[i] != null)
+            {
+                roundScoreTexts[i].text = "0 - 0";
             }
         }
     }
-    
-    public void CollectTextMeshProsWithTags(params string[] tags)
-    {
-        texts = new List<TextMeshProUGUI>();
-
-        foreach (var tag in tags)
-        {
-            GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(tag);
-
-            foreach (GameObject obj in taggedObjects)
-            {
-                TextMeshProUGUI tmp = obj.GetComponent<TextMeshProUGUI>();
-                if (tmp != null && !texts.Contains(tmp))
-                {
-                    texts.Add(tmp);
-                }
-            }
-        }
-    }
-
-}
-
-[System.Serializable]
-public struct RoundList
-{
-    [SerializeField] public RoundId roundId;
-    [SerializeField] public List<TextMeshProUGUI> texts;
 }

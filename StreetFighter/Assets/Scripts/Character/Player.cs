@@ -190,15 +190,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-        if (this.tag == "Player1")
-        {
-            GameStats.instance.player2TotalDamageDealt += damage;
-        }
-        else if (this.tag == "Player2")
-        {
-            GameStats.instance.player1TotalDamageDealt += damage;
-        }
+        healthBar.SetHealth(currentHealth);   
     }
 
     public void endAttack()
