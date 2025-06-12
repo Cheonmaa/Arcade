@@ -54,19 +54,20 @@ public class GameResultManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetRoundText(RoundId roundId, string text)
+    public void SetRoundText(RoundId roundId, int textIndex, string text)
     {
         foreach (var round in roundList)
         {
             if (round.roundId == roundId)
             {
-                foreach (var t in round.texts)
+                if (textIndex >= 0 && textIndex < round.texts.Count)
                 {
-                    t.text = text;
+                    round.texts[textIndex].text = text;
                 }
             }
         }
     }
+
     
     public void ResetTexts()
     {

@@ -77,8 +77,6 @@ public class VictorySystem : MonoBehaviour
     {
         WinCondition();
         RoundOver();
-        //GetPlayer1Stats();
-        //GetPlayer2Stats();
     }
 
     public void RoundOver()
@@ -89,6 +87,10 @@ public class VictorySystem : MonoBehaviour
         {
             PlayerGetWins();
             roundOver = true;
+            RoundId currentRound = (RoundId)GameStats.instance.roundsPlayed;
+            GameResultManager.instance.SetRoundText(currentRound, 0,$"Damage dealt: {GameStats.instance.player1TotalDamageDealt}\nHealth remaining: {player1.currentHealth}");
+            GameResultManager.instance.SetRoundText(currentRound, 2,$"Damage dealt: {GameStats.instance.player2TotalDamageDealt}\nHealth remaining: {player2.currentHealth}");
+            GameResultManager.instance.SetRoundText(currentRound, 1, $"{GameStats.instance.player1Score} - {GameStats.instance.player2Score}");
             GameStats.instance.roundsPlayed++;
             if (GameStats.instance.player1Score >= 2 || GameStats.instance.player2Score >= 2)
             {
@@ -174,16 +176,4 @@ public class VictorySystem : MonoBehaviour
             return;
         }
     }
-
-    /*public int GetPlayer1Stats()
-    {
-        if (roundOver) return GameStats.instance.player1RemainingHealth;
-        GameStats.instance.ResetPlayerStats();
-    }
-
-    public int GetPlayer2Stats()
-    {
-        if (roundOver) return GameStats.instance.player2RemainingHealth;
-        GameStats.instance.ResetPlayerStats();
-    }*/
 }
