@@ -1616,7 +1616,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520621074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameResultManager, Assembly-CSharp
         m_MethodName: OnClickRestartButton
         m_Mode: 1
@@ -2076,66 +2076,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395661562}
   m_CullTransparentMesh: 1
---- !u!1 &1520621073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1520621075}
-  - component: {fileID: 1520621074}
-  m_Layer: 0
-  m_Name: GameResultManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1520621074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520621073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a357aeb6c6b5cd49ac51b8766757c05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roundList:
-  - roundId: 0
-    texts:
-    - {fileID: 945872439}
-    - {fileID: 2013398388}
-    - {fileID: 2019914991}
-  - roundId: 1
-    texts:
-    - {fileID: 568006162}
-    - {fileID: 690282390}
-    - {fileID: 224615553}
-  - roundId: 2
-    texts:
-    - {fileID: 1187037366}
-    - {fileID: 1595598061}
-    - {fileID: 338274777}
---- !u!4 &1520621075
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520621073}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 949.1694, y: 474.5149, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1595598059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2355,7 +2295,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520621074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameResultManager, Assembly-CSharp
         m_MethodName: OnClickMainMenuButton
         m_Mode: 1
@@ -3113,7 +3053,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520621074}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameResultManager, Assembly-CSharp
         m_MethodName: OnClickQuitButton
         m_Mode: 1
@@ -3170,4 +3110,3 @@ SceneRoots:
   - {fileID: 225010752}
   - {fileID: 473312473}
   - {fileID: 2135126339}
-  - {fileID: 1520621075}
