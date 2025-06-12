@@ -53,7 +53,7 @@ public class GameResultManager : MonoBehaviour
 
         UpdateUI();
     }
-     private void UpdateUI()
+    private void UpdateUI()
     {
         for (int i = 0; i < 3; i++)
         {
@@ -73,12 +73,13 @@ public class GameResultManager : MonoBehaviour
             }
         }
     }
-    
+
     public void OnClickRestartButton()
     {
         VictorySystem.instance.roundOver = false;
         VictorySystem.instance.victory = false;
         ResetTexts();
+        ResetGameStats();
         SceneManager.LoadScene("SELECTCHAR");
     }
 
@@ -109,5 +110,14 @@ public class GameResultManager : MonoBehaviour
                 roundScoreTexts[i].text = "0 - 0";
             }
         }
+    }
+    
+    public void ResetGameStats()
+    {
+        GameStats.instance.player1RemainingHealth = new int[3] { 0, 0, 0 };
+        GameStats.instance.player2RemainingHealth = new int[3] { 0, 0, 0 };
+        GameStats.instance.player1TotalDamageDealt = new int[3] { 0, 0, 0 };
+        GameStats.instance.player2TotalDamageDealt = new int[3] { 0, 0, 0 };
+        GameStats.instance.roundsPlayed = 0;
     }
 }
