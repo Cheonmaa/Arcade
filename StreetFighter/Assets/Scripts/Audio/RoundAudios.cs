@@ -4,7 +4,7 @@ using System.Collections;
 public class RoundAudios : MonoBehaviour
 {
     [Header("Audio Sources")]
-    public AudioSource audio;
+    public new AudioSource audio;
 
     void Start() { StartCoroutine(PlayAudioWithDelay()); StartCoroutine(NextSceneDelay()); }
 

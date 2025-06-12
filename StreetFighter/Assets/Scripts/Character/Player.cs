@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     private float blockCooldown = 5f;
     public bool isBlocking = false;
 
+    public float attackCooldown = 0.6f;
+    public float nextAttackTime = 0f;
+
 
     [Header("Components")]
     public HealthBar healthBar;
@@ -126,9 +129,9 @@ public class Player : MonoBehaviour
     {
         if (CompareTag("Player1"))
         {
-            if (Esp32InputReader.Instance.buttonState1P1 && canAttack && !isBlocking)
+            if (Esp32InputReader.Instance.buttonState1P1 && canAttack && !isBlocking && Time.time >= nextAttackTime)
             {
-
+                nextAttackTime = Time.time + attackCooldown;
                 if (Esp32InputReader.Instance.y1 == 1)
                 {
                     anim.SetBool("IsKicking", true);
@@ -145,8 +148,9 @@ public class Player : MonoBehaviour
         }
         else if (CompareTag("Player2"))
         {
-            if (Esp32InputReader.Instance.buttonState1P2 && canAttack && !isBlocking)
+            if (Esp32InputReader.Instance.buttonState1P2 && canAttack && !isBlocking && Time.time >= nextAttackTime)
             {
+                nextAttackTime = Time.time + attackCooldown;
                 if (Esp32InputReader.Instance.y2 == 1)
                 {
                     anim.SetBool("IsKicking", true);
