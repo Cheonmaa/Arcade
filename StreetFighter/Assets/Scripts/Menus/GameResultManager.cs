@@ -75,6 +75,20 @@ public class GameResultManager : MonoBehaviour
             roundList = tempRoundList.ToArray();
         }
     }
+    
+    private void AddTextFromTag(List<TextMeshProUGUI> list, string tag)
+    {
+        GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(tag);
+        foreach (GameObject obj in taggedObjects)
+        {
+            TextMeshProUGUI tmp = obj.GetComponent<TextMeshProUGUI>();
+            if (tmp != null && !list.Contains(tmp))
+            {
+                list.Add(tmp);
+                texts.Add(tmp);
+            }
+        }
+    }
 
     public void OnClickRestartButton()
     {
