@@ -36,6 +36,46 @@ public class GameResultManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Resume")
+        {
+            texts = new List<TextMeshProUGUI>();
+            List<RoundList> tempRoundList = new List<RoundList>();
+
+            foreach (RoundId roundId in Enum.GetValues(typeof(RoundId)))
+            {
+                string tag1 = $"Stats{roundId}";
+                string tag2 = $"Stats{roundId}P2";
+                string scoreTag = roundId.ToString(); 
+                List<TextMeshProUGUI> tmpList = new List<TextMeshProUGUI>();
+                AddTextFromTag(tmpList, tag1);
+                AddTextFromTag(tmpList, tag2);
+                AddTextFromTag(tmpList, scoreTag);
+                if (tmpList.Count > 0)
+                {
+                    RoundList rl = new RoundList
+                    {
+                        roundId = roundId,
+                        texts = tmpList
+                    };
+                    tempRoundList.Add(rl);
+                }
+            }
+            roundList = tempRoundList.ToArray();
+        }
+    }
+
     public void OnClickRestartButton()
     {
         VictorySystem.instance.roundOver = false;
@@ -68,7 +108,7 @@ public class GameResultManager : MonoBehaviour
         }
     }
 
-    
+
     public void ResetTexts()
     {
         foreach (var round in roundList)
@@ -79,6 +119,26 @@ public class GameResultManager : MonoBehaviour
             }
         }
     }
+    
+    public void CollectTextMeshProsWithTags(params string[] tags)
+    {
+        texts = new List<TextMeshProUGUI>();
+
+        foreach (var tag in tags)
+        {
+            GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(tag);
+
+            foreach (GameObject obj in taggedObjects)
+            {
+                TextMeshProUGUI tmp = obj.GetComponent<TextMeshProUGUI>();
+                if (tmp != null && !texts.Contains(tmp))
+                {
+                    texts.Add(tmp);
+                }
+            }
+        }
+    }
+
 }
 
 [System.Serializable]

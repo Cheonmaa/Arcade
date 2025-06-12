@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 224615553}
   m_Layer: 5
   m_Name: StatsRound2_P2
-  m_TagString: Untagged
+  m_TagString: StatsRound2P2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 338274777}
   m_Layer: 5
   m_Name: StatsRound3_P2
-  m_TagString: Untagged
+  m_TagString: StatsRound3P2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -964,7 +964,7 @@ GameObject:
   - component: {fileID: 568006162}
   m_Layer: 5
   m_Name: StatsRound2
-  m_TagString: Untagged
+  m_TagString: StatsRound2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1100,7 +1100,7 @@ GameObject:
   - component: {fileID: 690282390}
   m_Layer: 5
   m_Name: Round2
-  m_TagString: Untagged
+  m_TagString: Round2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1236,7 +1236,7 @@ GameObject:
   - component: {fileID: 882271680}
   m_Layer: 5
   m_Name: Round1
-  m_TagString: Untagged
+  m_TagString: Round1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1372,7 +1372,7 @@ GameObject:
   - component: {fileID: 945872439}
   m_Layer: 5
   m_Name: StatsRound1
-  m_TagString: Untagged
+  m_TagString: StatsRound1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1679,7 +1679,7 @@ GameObject:
   - component: {fileID: 1187037366}
   m_Layer: 5
   m_Name: StatsRound3
-  m_TagString: Untagged
+  m_TagString: StatsRound3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2149,7 +2149,7 @@ GameObject:
   - component: {fileID: 1595598061}
   m_Layer: 5
   m_Name: round3
-  m_TagString: Untagged
+  m_TagString: Round3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2828,7 +2828,7 @@ GameObject:
   - component: {fileID: 2019914991}
   m_Layer: 5
   m_Name: StatsRound1_P2
-  m_TagString: Untagged
+  m_TagString: StatsRound1P2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

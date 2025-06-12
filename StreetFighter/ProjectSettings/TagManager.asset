@@ -9,6 +9,15 @@ TagManager:
   - CurrentRounds
   - playerName
   - playerName2
+  - StatsRound1
+  - StatsRound1P2
+  - StatsRound2
+  - StatsRound2P2
+  - Round1
+  - Round2
+  - Round3
+  - StatsRound3
+  - StatsRound3P2
   layers:
   - Default
   - TransparentFX
