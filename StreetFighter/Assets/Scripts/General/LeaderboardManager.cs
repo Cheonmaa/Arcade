@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LeaderboardManager : MonoBehaviour
@@ -24,6 +25,29 @@ public class LeaderboardManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
         LoadLeaderboard();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MENU")
+        {
+            leaderboardContainer = GameObject.Find("LeaderboardContainer")?.transform;
+            leaderboardLinePrefab = Resources.Load<GameObject>("LeaderboardLine");
+            if (leaderboardContainer != null && leaderboardLinePrefab != null)
+            {
+                DisplayLeaderboard();
+            }
+        }
     }
 
     private void Start()
