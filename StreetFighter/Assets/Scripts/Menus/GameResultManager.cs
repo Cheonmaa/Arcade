@@ -52,13 +52,19 @@ public class GameResultManager : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "RESUME")
+        {
+            
+
+        mainMenuButton = GameObject.FindGameObjectWithTag("Main").GetComponent<Button>();
+        quitButton = GameObject.FindGameObjectWithTag("Quit").GetComponent<Button>();
+        restartButton = GameObject.FindGameObjectWithTag("Restart").GetComponent<Button>();
 
         restartButton.onClick.AddListener(OnClickRestartButton);
         mainMenuButton.onClick.AddListener(OnClickMainMenuButton);
         quitButton.onClick.AddListener(OnClickQuitButton);
-        mainMenuButton = GameObject.FindGameObjectWithTag("Main").GetComponent<Button>();
-        quitButton = GameObject.FindGameObjectWithTag("Quit").GetComponent<Button>();
-        restartButton = GameObject.FindGameObjectWithTag("Restart").GetComponent<Button>();
+        }
+
         p1StatsTexts[0] = GameObject.FindGameObjectWithTag("StatsRound1")?.GetComponent<TextMeshProUGUI>();
         p1StatsTexts[1] = GameObject.FindGameObjectWithTag("StatsRound2")?.GetComponent<TextMeshProUGUI>();
         p1StatsTexts[2] = GameObject.FindGameObjectWithTag("StatsRound3")?.GetComponent<TextMeshProUGUI>();
