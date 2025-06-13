@@ -18,6 +18,9 @@ TagManager:
   - Round3
   - StatsRound3
   - StatsRound3P2
+  - Main
+  - Quit
+  - Restart
   layers:
   - Default
   - TransparentFX
