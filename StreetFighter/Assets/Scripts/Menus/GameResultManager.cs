@@ -24,6 +24,9 @@ public class GameResultManager : MonoBehaviour
     private TextMeshProUGUI[] p1StatsTexts = new TextMeshProUGUI[3];
     private TextMeshProUGUI[] p2StatsTexts = new TextMeshProUGUI[3];
     private TextMeshProUGUI[] roundScoreTexts = new TextMeshProUGUI[3];
+    public Button restartButton;
+    public Button mainMenuButton;
+    public Button quitButton;
 
     // Update is called once per frame
     private void Awake()
@@ -39,6 +42,10 @@ public class GameResultManager : MonoBehaviour
 
     private void Start()
     {
+
+        restartButton.onClick.AddListener(OnClickRestartButton);
+        mainMenuButton.onClick.AddListener(OnClickMainMenuButton);
+        quitButton.onClick.AddListener(OnClickQuitButton);
         p1StatsTexts[0] = GameObject.FindGameObjectWithTag("StatsRound1")?.GetComponent<TextMeshProUGUI>();
         p1StatsTexts[1] = GameObject.FindGameObjectWithTag("StatsRound2")?.GetComponent<TextMeshProUGUI>();
         p1StatsTexts[2] = GameObject.FindGameObjectWithTag("StatsRound3")?.GetComponent<TextMeshProUGUI>();
@@ -111,7 +118,7 @@ public class GameResultManager : MonoBehaviour
             }
         }
     }
-    
+
     public void ResetGameStats()
     {
         GameStats.instance.player1RemainingHealth = new int[3] { 0, 0, 0 };
@@ -120,4 +127,6 @@ public class GameResultManager : MonoBehaviour
         GameStats.instance.player2TotalDamageDealt = new int[3] { 0, 0, 0 };
         GameStats.instance.roundsPlayed = 0;
     }
+    
+    
 }

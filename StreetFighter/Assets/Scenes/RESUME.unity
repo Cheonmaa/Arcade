@@ -1252,6 +1252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a357aeb6c6b5cd49ac51b8766757c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restartButton: {fileID: 1101276870}
+  mainMenuButton: {fileID: 1705613674}
+  quitButton: {fileID: 1705613674}
 --- !u!4 &754549399
 Transform:
   m_ObjectHideFlags: 0
