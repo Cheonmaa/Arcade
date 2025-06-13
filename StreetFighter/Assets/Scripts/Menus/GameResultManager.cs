@@ -65,6 +65,7 @@ public class GameResultManager : MonoBehaviour
         quitButton.onClick.AddListener(OnClickQuitButton);
         }
 
+        AddScoresToLeaderboard();
         p1StatsTexts[0] = GameObject.FindGameObjectWithTag("StatsRound1")?.GetComponent<TextMeshProUGUI>();
         p1StatsTexts[1] = GameObject.FindGameObjectWithTag("StatsRound2")?.GetComponent<TextMeshProUGUI>();
         p1StatsTexts[2] = GameObject.FindGameObjectWithTag("StatsRound3")?.GetComponent<TextMeshProUGUI>();
@@ -149,5 +150,15 @@ public class GameResultManager : MonoBehaviour
         GameStats.instance.roundsPlayed = 0;
     }
     
+    private void AddScoresToLeaderboard()
+    {
+        if (LeaderboardManager.instance == null)
+        {
+            Debug.LogWarning("LeaderboardManager instance not found.");
+            return;
+        }
+        LeaderboardManager.instance.AddScore("Player1", GameStats.instance.player1Score);
+        LeaderboardManager.instance.AddScore("Player2", GameStats.instance.player2Score);
+    }
     
 }
