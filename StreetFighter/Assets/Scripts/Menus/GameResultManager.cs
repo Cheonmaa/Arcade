@@ -114,6 +114,8 @@ public class GameResultManager : MonoBehaviour
     
     public void ResetGameStats()
     {
+        GameStats.instance.player1Score = 0;
+        GameStats.instance.player2Score = 0;
         GameStats.instance.player1RemainingHealth = new int[3] { 0, 0, 0 };
         GameStats.instance.player2RemainingHealth = new int[3] { 0, 0, 0 };
         GameStats.instance.player1TotalDamageDealt = new int[3] { 0, 0, 0 };
