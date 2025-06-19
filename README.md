@@ -35,10 +35,9 @@ In unity hub, select "Add project from disk" open the project from the FighterSt
 
 Setup an esp32 with two joystick and 4 buttons like the following:
 
-![esp32 setup image accessible in repo file if link is broken](https://github.com/Cheonmaa/Arcade/image/setup.png "esp32 setup")
+![esp32 setup image accessible in repo file if link is broken](image/setup.png "esp32 setup")
 
 ## Usage
-
 Run the main.cpp on the esp32 (Port detection is automatic, if you're having trouble with the port, use COM4.)
 
 Start the game from the unity Editor.
