@@ -33,7 +33,7 @@ git clone https://github.com/Cheonmaa/Arcade
 
 In unity hub, select "Add project from disk" open the project from the FighterStreet folder.
 
-Setup an esp32 with two joystick and 4 buttons like the following:
+Setup an esp32 with two joysticks and 4 buttons like the following:
 
 ![esp32 setup image accessible in repo file if link is broken](image/setup.png "esp32 setup")
 
